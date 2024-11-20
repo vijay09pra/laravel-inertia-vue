@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
 
         $fileds = $request->validate([
-            'avatar' => ['file', 'nullable', 'max:300'],
+            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:3072'],
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed'],
@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard')->with('greet', 'welcome to laravel inertia app');
 
     }
 

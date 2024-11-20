@@ -1,6 +1,7 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
 import Textinput from "../Components/Textinput.vue";
+import { ref } from "vue";
 // import { preview } from "vite";
 
 const form = useForm({
@@ -11,11 +12,26 @@ const form = useForm({
     avatar: null,
     preview: null,
 });
+
+const fileError = ref(null);
 const change = (e) => {
-    form.avatar = e.target.files[0];
-    form.preview = URL.createObjectURL(e.target.files[0]);
+    // form.avatar = e.target.files[0];
+    // form.preview = URL.createObjectURL(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file.size > 3072 * 1024) { // 3072 KB = 3 MB
+        fileError.value = "File size should not exceed 3 MB."; // Set error message
+        form.avatar = null;
+        form.preview = null;
+    } else {
+        fileError.value = null; // Clear error message if valid
+        form.avatar = file;
+        form.preview = URL.createObjectURL(file);
+    }
 };
 const submit = () => {
+    if (fileError.value) {
+        return; // Prevent submission if there's a file error
+    }
     form.post(route("register"), {
         onError: () => form.reset("password", "password_confirmation"),
     });
@@ -48,6 +64,8 @@ const submit = () => {
                     </div>
                     <p class="error mt-2">{{ form.errors.avatar }}</p>
                 </div>
+                <div v-if="fileError" class="text-red-500 mt-2">{{ fileError }}</div>
+
                 <Textinput
                     name="name"
                     v-model="form.name"

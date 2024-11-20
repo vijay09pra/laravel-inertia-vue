@@ -22,9 +22,9 @@ defineProps({
         <input
             :type="type"
             v-model="model"
-            :class="{ '!ring-red-500': message }"
+            :class="{ '!text-red-500': message }"
             class="border-solid border-2 rounded w-full"
         />
-        <small class="error" v-if="message"> {{ message }}</small>
+        <small class="text-red-500" v-if="message"> {{ message }}</small>
     </div>
 </template>
