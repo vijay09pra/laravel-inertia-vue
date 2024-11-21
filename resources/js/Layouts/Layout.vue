@@ -53,7 +53,12 @@
                         }"
                         >Register</Link
                     >
+                    <Link
+                        :href="route('main')"
+                        class="nav-link"
 
+                        >Main</Link
+                    >
                     <Link
                         :href="route('login')"
                         class="nav-link"

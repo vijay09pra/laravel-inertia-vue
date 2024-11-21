@@ -1,22 +1,28 @@
 <template>
     <Head :title="' | Home'" />
-    <div>
+    <div class="w-3/4 mx-auto p-2">
         <h1>Home page</h1>
     </div>
-    <div>
+    <div class="w-full m-4">
         <div class="flex justify-end mb-4">
-            <div class="w-1/4">
-                <input type="search" placeholder="Search" v-model="search" />
+            <div class="w-full max-w-md">
+                <!-- Adjust width and max-width for better control -->
+                <input
+                    type="search"
+                    placeholder="Search"
+                    v-model="search"
+                    class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
             </div>
         </div>
-        <table>
+        <table class="w-3/4 mx-auto p-2">
             <thead>
                 <tr class="bg-slate-300">
-                    <th>Avatar</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Registration Date</th>
-                    <th v-if="can.delete_user">Delete</th>
+                    <th class="text-left p-2">Avatar</th>
+                    <th class="text-left p-2">Name</th>
+                    <th class="text-left p-2">Email</th>
+                    <th class="text-left p-2">Registration Date</th>
+                    <th v-if="can.delete_user" class="text-left p-2">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,13 +42,15 @@
                     <td>{{ user.email }}</td>
                     <td>{{ getDate(user.created_at) }}</td>
                     <td v-if="can.delete_user">
-                        <button class="bg-red-500 w-6 h-6 rounded-full"></button>
+                        <button
+                            class="bg-red-500 w-6 h-6 rounded-full"
+                        ></button>
                     </td>
                 </tr>
             </tbody>
         </table>
         <!-- pagination -->
-        <div>
+        <div class="w-3/4 mx-auto p-2">
             <Link
                 v-for="link in users.links"
                 :key="link.label"

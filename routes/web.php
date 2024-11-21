@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use PHPUnit\Framework\Attributes\Group;
 
-
-
 // Route::inertia('/', 'Home', ['users' => User::paginate(5)])->name('home');
 
 // for searching functionality create new function on home page
@@ -53,6 +51,8 @@ Route::middleware('guest')->group(function () {
 
     Route::inertia('/login', 'Auth/Login')->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/main', [AuthController::class, 'main'])->name('main');
+
 
 });
 

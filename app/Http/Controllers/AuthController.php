@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Storage;
 
 class AuthController extends Controller
@@ -61,5 +62,10 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('home');
+    }
+
+    public function main(){
+
+        return Inertia::render( 'Main');
     }
 }
